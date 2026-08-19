@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.cache/
+outputs/traces/*.json
+outputs/scorecard.md
+data/invoicing.db
+.pytest_cache/
+.DS_Store

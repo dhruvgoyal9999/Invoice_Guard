@@ -1,0 +1,22 @@
+# Core
+pydantic>=2.6,<3.0
+python-dotenv>=1.0
+
+# Extraction (Phase 4)
+openai>=1.60
+PyMuPDF>=1.24
+Pillow>=10.0
+
+# Matching (Phase 5)
+rapidfuzz>=3.6
+
+# Invoice corpus generation (Phase 3)
+Jinja2>=3.1
+weasyprint>=61.0
+
+# Interface (Phase 9)
+streamlit>=1.35
+pandas>=2.2
+
+# Testing
+pytest>=8.0
