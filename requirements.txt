@@ -1,22 +1,24 @@
-# Core
+# Derived from what is actually imported. Nothing here needs system libraries,
+# so `pip install -r requirements.txt` works on a clean machine and on a host
+# without a custom build step.
+
+# --- the engine (needed to run anything) ----------------------------------
 pydantic>=2.6,<3.0
+rapidfuzz>=3.6          # vendor name matching
+PyMuPDF>=1.24           # PDF text extraction and page rendering
+
+# --- interface -------------------------------------------------------------
+streamlit>=1.35
+pandas>=2.2             # Streamlit renders dataframes through it
+
+# --- premium reader (optional; the free reader needs neither) --------------
+openai>=1.60
 python-dotenv>=1.0
 
-# Extraction (Phase 4)
-openai>=1.60
-PyMuPDF>=1.24
-Pillow>=10.0
+# --- generating the test corpus (scripts/, not needed to run the app) ------
+reportlab>=4.0          # invoice PDFs
+Pillow>=10.0            # scan degradation
+numpy>=1.26             # scan noise
 
-# Matching (Phase 5)
-rapidfuzz>=3.6
-
-# Invoice corpus generation (Phase 3)
-Jinja2>=3.1
-weasyprint>=61.0
-
-# Interface (Phase 9)
-streamlit>=1.35
-pandas>=2.2
-
-# Testing
+# --- tests -----------------------------------------------------------------
 pytest>=8.0
