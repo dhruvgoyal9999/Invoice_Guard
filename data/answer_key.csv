@@ -1,0 +1,22 @@
+seq,invoice_file,source_type,vendor_id,expected_po,expected_decision,expected_determining_rules,expected_decision_free,expected_determining_rules_free,expected_subtotal_rupees,notes,free_tier_note
+01,01_INV-PIN-4471.pdf,clean_pdf,V-004,PO-1001,AUTO_APPROVE,,AUTO_APPROVE,,198500.00,Baseline under-billing,
+02,02_INV-VTX-2208.pdf,clean_pdf,V-005,PO-1002,AUTO_APPROVE,,AUTO_APPROVE,,450000.00,Exact match to PO,
+03,03_QA-2026-0117.pdf,clean_pdf,V-008,PO-1004,AUTO_APPROVE,,AUTO_APPROVE,,320000.00,Slash-format invoice number,
+04,04_INV-NEX-5590.pdf,clean_pdf,V-003,PO-1006,AUTO_APPROVE,,AUTO_APPROVE,,848000.00,28% GST slab - tests R-401 R-404,
+05,05_INV-MER-3301.pdf,clean_pdf,V-002,PO-1007,AUTO_APPROVE,,AUTO_APPROVE,,695000.00,Partially billed PO - checks remaining balance,
+06,06_INV-VTX-2251.pdf,scanned_image,V-005,PO-1008,AUTO_APPROVE,,HOLD_FOR_REVIEW,R-010,698000.00,Scanned; PO just above crossover - cap binds,Free tier cannot read scans - escalate to premium
+07,07_INV-PIN-4502.pdf,scanned_image,V-004,PO-1009,AUTO_APPROVE,,HOLD_FOR_REVIEW,R-010,664000.00,Scanned; PO just below crossover - percentage binds,Free tier cannot read scans - escalate to premium
+08,08_INV-NEX-5612.pdf,clean_pdf,V-003,PO-1005,HOLD_FOR_REVIEW,R-302|R-303,HOLD_FOR_REVIEW,R-302|R-303,2025000.00,EC-3 cap binds; overage 1.25% is under 1.5% but over Rs 10000,
+09,09_SL-8834.pdf,clean_pdf,V-001,PO-1003,HOLD_FOR_REVIEW,R-302|R-303,HOLD_FOR_REVIEW,R-302|R-303,130000.00,Percentage binds; overage Rs 5000 is under cap but over 1.5%,
+10,10_INV-MER-3312.pdf,clean_pdf,V-002,PO-1010,AUTO_APPROVE,,AUTO_APPROVE,,400000.00,EC-1 first tranche,
+11,11_INV-MER-3348.pdf,clean_pdf,V-002,PO-1010,AUTO_APPROVE,,AUTO_APPROVE,,350000.00,EC-1 second tranche,
+12,12_INV-MER-3390.pdf,clean_pdf,V-002,PO-1010,APPROVE_WITH_FLAG,R-304,APPROVE_WITH_FLAG,R-304,260000.00,EC-1 third tranche - overage exactly Rs 10000 passes on strict >,
+13,13_INV-MER-3391.pdf,clean_pdf,V-002,PO-1010,HOLD_FOR_REVIEW,R-302|R-303,HOLD_FOR_REVIEW,R-302|R-303,50000.00,EC-1 failure twin - PO exhausted,
+14,14_SL-9012.pdf,clean_pdf,V-001,PO-1011,AUTO_APPROVE,,AUTO_APPROVE,,45000.00,EC-2 March 1-15 retainer,
+15,15_SL-9034.pdf,clean_pdf,V-001,PO-1011,AUTO_APPROVE,,AUTO_APPROVE,,45000.00,EC-2 March 16-31 - same amount 15 days later but period differs,
+16,16_SL-9047.pdf,clean_pdf,V-001,PO-1011,HOLD_FOR_REVIEW,R-502,HOLD_FOR_REVIEW,R-502,45000.00,EC-2 true duplicate - period identical to seq 15,
+17,17_ILLEGIBLE.pdf,scanned_image,V-001,PO-1003,HOLD_FOR_REVIEW,R-001,HOLD_FOR_REVIEW,R-010,120000.00,EC-4 invoice number unreadable; R-501 must SKIP not PASS,Free tier blocked by gate; premium holds on R-001 instead
+18,18_INV-PIN-4520.pdf,clean_pdf,V-004,PO-1012,REJECT,R-104,REJECT,R-104,25000.00,PO is CLOSED,
+19,19_QA-2026-0131.pdf,clean_pdf,V-008,PO-1013,REJECT,R-104,REJECT,R-104,150000.00,PO is CANCELLED,
+20,20_CF-2026-0088.pdf,clean_pdf,V-006,PO-1014,REJECT,R-201,REJECT,R-201,270000.00,Vendor not approved - clean match does not rescue it,
+21,21_AFM-0034.pdf,clean_pdf,V-007,PO-1015,APPROVE_WITH_FLAG,R-603|R-203,APPROVE_WITH_FLAG,R-603|R-203,92000.00,Expired PO validity plus first invoice from vendor,

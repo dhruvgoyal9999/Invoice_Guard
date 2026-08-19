@@ -1,0 +1,16 @@
+po_number,vendor_id,vendor_name,po_date,po_total_rupees,currency,already_invoiced_rupees,status,expected_gst_rate,description,valid_until
+PO-1001,V-004,Pinnacle Office Supplies Private Limited,2026-06-10,200000.00,INR,0.00,OPEN,18,Office stationery and consumables Q3,2026-12-31
+PO-1002,V-005,Vertex Software Solutions Private Limited,2026-05-22,450000.00,INR,0.00,OPEN,18,Annual licence renewal - CRM platform,2026-11-30
+PO-1003,V-001,Sharma Logistics Private Limited,2026-07-01,125000.00,INR,0.00,OPEN,18,Freight - Mumbai to Pune corridor,2027-01-31
+PO-1004,V-008,Quantum Analytics Private Limited,2026-06-18,320000.00,INR,0.00,OPEN,18,Market research dashboard build,2026-12-31
+PO-1005,V-003,Nexus Industrial Equipment Private Limited,2026-04-15,2000000.00,INR,0.00,OPEN,18,Conveyor system - Plant 2 installation,2026-10-31
+PO-1006,V-003,Nexus Industrial Equipment Private Limited,2026-05-08,850000.00,INR,0.00,OPEN,28,Hydraulic press unit with spares,2026-11-30
+PO-1007,V-002,Meridian Consulting Services LLP,2026-03-20,1200000.00,INR,500000.00,OPEN,18,Supply chain transformation - Phase 1,2026-09-30
+PO-1008,V-005,Vertex Software Solutions Private Limited,2026-06-25,700000.00,INR,0.00,OPEN,18,Custom integration module development,2026-12-31
+PO-1009,V-004,Pinnacle Office Supplies Private Limited,2026-05-14,666666.00,INR,0.00,OPEN,18,Workstation furniture - Floor 4 refit,2026-11-30
+PO-1010,V-002,Meridian Consulting Services LLP,2026-02-10,1000000.00,INR,0.00,OPEN,18,Operating model review - phased delivery,2026-12-31
+PO-1011,V-001,Sharma Logistics Private Limited,2026-01-05,540000.00,INR,90000.00,OPEN,18,Monthly freight retainer - calendar 2026,2026-12-31
+PO-1012,V-004,Pinnacle Office Supplies Private Limited,2026-02-14,180000.00,INR,180000.00,CLOSED,18,Printer cartridges and paper - Q1,2026-06-30
+PO-1013,V-008,Quantum Analytics Private Limited,2026-05-30,400000.00,INR,0.00,CANCELLED,18,Customer segmentation study - withdrawn,2026-11-30
+PO-1014,V-006,Coastal Freight Carriers Private Limited,2026-06-05,275000.00,INR,0.00,OPEN,18,Port handling and last-mile delivery,2026-12-31
+PO-1015,V-007,Alpine Facility Management Private Limited,2026-01-15,95000.00,INR,0.00,OPEN,18,Housekeeping services - Q1 contract,2026-06-30

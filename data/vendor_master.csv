@@ -1,0 +1,9 @@
+vendor_id,legal_name,aliases,gstin,is_approved,onboarded_date
+V-001,Sharma Logistics Private Limited,Sharma Logistics|Sharma Logistics Pvt Ltd|SHARMA LOGISTICS PVT. LTD.,27AABCS1429B1ZX,TRUE,2024-04-12
+V-002,Meridian Consulting Services LLP,Meridian Consulting|Meridian Consulting LLP|Meridian Services,29AACFM8821K1ZQ,TRUE,2023-11-03
+V-003,Nexus Industrial Equipment Private Limited,Nexus Industrial|Nexus Equipment|Nexus Industrial Equipment,24AABCN5567L1ZD,TRUE,2024-01-20
+V-004,Pinnacle Office Supplies Private Limited,Pinnacle Office|Pinnacle Supplies|Pinnacle Office Supplies,07AABCP3312M1ZF,TRUE,2023-06-15
+V-005,Vertex Software Solutions Private Limited,Vertex Software|Vertex Solutions|Vertex Software Solutions,29AABCV7745N1ZR,TRUE,2024-08-01
+V-006,Coastal Freight Carriers Private Limited,Coastal Freight|Coastal Carriers,33AAACC2298P1ZJ,FALSE,2026-05-30
+V-007,Alpine Facility Management Private Limited,Alpine Facility|Alpine FM|Alpine Facilities,06AADCA9903Q1ZT,TRUE,2026-07-15
+V-008,Quantum Analytics Private Limited,Quantum Analytics|Quantum Analytics Pvt Ltd,19AABCQ6614R1ZB,TRUE,2024-02-28
