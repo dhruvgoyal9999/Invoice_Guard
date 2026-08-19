@@ -1,0 +1,429 @@
+{
+  "trace_id": "17_ILLEGIBLE_e8a89c67",
+  "processed_at": "2026-08-17T18:14:38.400140Z",
+  "source_file": "C:\\Users\\73427\\Downloads\\invoice-decisioning (1)\\invoice-decisioning\\data\\invoices\\scanned\\17_ILLEGIBLE.pdf",
+  "source_type": "scanned_image",
+  "pipeline_version": "1.0",
+  "stage_1_extraction": {
+    "tier": "free",
+    "model": "pymupdf-local",
+    "duration_ms": 12,
+    "cached": false,
+    "extractable_text": false,
+    "fields": {
+      "invoice_number": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "invoice_date": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "vendor_name": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "vendor_gstin": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "po_reference": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "service_period": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "line_items": [],
+      "subtotal_paise": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "gst_rate": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "tax_paise": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "total_paise": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": null
+      },
+      "extraction_notes": [
+        "No text layer -- this is a scanned document"
+      ]
+    },
+    "quality": {
+      "extractable_text": false,
+      "critical_present": 0,
+      "critical_total": 5,
+      "missing_critical": [
+        "invoice_number",
+        "invoice_date",
+        "vendor_name",
+        "subtotal_paise",
+        "total_paise"
+      ],
+      "mean_critical_confidence": 0.0,
+      "passes_gate": false,
+      "gate_reason": "Scanned or image-only document. The free extractor reads embedded text only and cannot process this invoice. Retry with premium extraction."
+    },
+    "self_checks": {
+      "line_items_sum_to_subtotal": null,
+      "subtotal_plus_tax_equals_total": null,
+      "tax_matches_rate": null,
+      "date_parseable": null,
+      "gstin_well_formed": null,
+      "notes": []
+    },
+    "low_confidence_fields": []
+  },
+  "stage_2_matching": {
+    "match_status": "NO_MATCH",
+    "match_layer": 4,
+    "match_confidence": "NONE",
+    "po_number": null,
+    "vendor_id": null,
+    "vendor_name_matched": null,
+    "candidates_considered": [],
+    "vendor_match_score": 0,
+    "notes": [
+      "Vendor not identified - No vendor name or GSTIN on the invoice",
+      "Cannot infer a PO without knowing the vendor"
+    ]
+  },
+  "stage_3_financials": null,
+  "stage_4_rules": [
+    {
+      "rule_id": "R-001",
+      "name": "Invoice number present",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-002",
+      "name": "Invoice date present and parseable",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-003",
+      "name": "Subtotal present",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-004",
+      "name": "Total present",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-005",
+      "name": "Vendor identifiable",
+      "status": "SKIP",
+      "severity": "BLOCKER",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-006",
+      "name": "Line items sum to subtotal",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-007",
+      "name": "Subtotal plus tax equals total",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-008",
+      "name": "Critical fields meet confidence floor",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-009",
+      "name": "Supporting fields meet confidence floor",
+      "status": "SKIP",
+      "severity": "INFO",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-010",
+      "name": "Extraction quality sufficient",
+      "status": "FAIL",
+      "severity": "CRITICAL",
+      "expected": "gate passed",
+      "actual": "gate failed",
+      "message": "Scanned or image-only document. The free extractor reads embedded text only and cannot process this invoice. Retry with premium extraction."
+    },
+    {
+      "rule_id": "R-101",
+      "name": "A purchase order was matched",
+      "status": "SKIP",
+      "severity": "BLOCKER",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-102",
+      "name": "Match is unambiguous",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-103",
+      "name": "Invoice vendor matches PO vendor",
+      "status": "SKIP",
+      "severity": "BLOCKER",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-104",
+      "name": "Purchase order is open",
+      "status": "SKIP",
+      "severity": "BLOCKER",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-105",
+      "name": "Match came from a printed PO reference",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-201",
+      "name": "Vendor is on the approved list",
+      "status": "SKIP",
+      "severity": "BLOCKER",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-202",
+      "name": "Invoice GSTIN matches vendor master",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-203",
+      "name": "Vendor has prior invoice history",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-301",
+      "name": "Currency is supported",
+      "status": "SKIP",
+      "severity": "BLOCKER",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-302",
+      "name": "Over-billing within tolerance",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-303",
+      "name": "Contract ceiling not breached",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-304",
+      "name": "Tolerance not substantially consumed",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-305",
+      "name": "Billing position against the PO",
+      "status": "SKIP",
+      "severity": "INFO",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-401",
+      "name": "GST rate is a valid slab",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-402",
+      "name": "Tax arithmetic is correct",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-403",
+      "name": "Vendor GSTIN is well formed",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-404",
+      "name": "GST rate matches the PO expectation",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-501",
+      "name": "Not an exact duplicate",
+      "status": "SKIP",
+      "severity": "BLOCKER",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-502",
+      "name": "Not a suspected near-duplicate",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-601",
+      "name": "Invoice is not dated before its PO",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-602",
+      "name": "Invoice is not dated in the future",
+      "status": "SKIP",
+      "severity": "CRITICAL",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-603",
+      "name": "Invoice falls within the PO validity window",
+      "status": "SKIP",
+      "severity": "WARNING",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    },
+    {
+      "rule_id": "R-604",
+      "name": "Invoice date reading is unambiguous",
+      "status": "SKIP",
+      "severity": "INFO",
+      "expected": null,
+      "actual": null,
+      "message": "Not checked: the document could not be read (see R-010)"
+    }
+  ],
+  "stage_5_decision": {
+    "decision": "HOLD_FOR_REVIEW",
+    "determined_by": [
+      "R-010"
+    ],
+    "rules_run": 33,
+    "rules_passed": 0,
+    "rules_failed": 1,
+    "rules_skipped": 32,
+    "summary": "Hold For Review -- held for an AP reviewer.\nNo purchase order could be matched.\n\nDecided by:\n  R-010 - Scanned or image-only document. The free extractor reads embedded text only and cannot process this invoice. Retry with premium extraction.\n\n32 check(s) could not be run: R-001, R-002, R-003, R-004, R-005, R-006, R-007, R-008, R-009, R-101, R-102, R-103, R-104, R-105, R-201, R-202, R-203, R-301, R-302, R-303, R-304, R-305, R-401, R-402, R-403, R-404, R-501, R-502, R-601, R-602, R-603, R-604. These are recorded as not checked, not as passed."
+  }
+}

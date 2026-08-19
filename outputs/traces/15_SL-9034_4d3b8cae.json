@@ -1,0 +1,454 @@
+{
+  "trace_id": "15_SL-9034_4d3b8cae",
+  "processed_at": "2026-08-17T19:37:21.538195Z",
+  "source_file": "C:\\Users\\73427\\Downloads\\invoice-decisioning (1)\\invoice-decisioning\\data\\invoices\\clean\\15_SL-9034.pdf",
+  "source_type": "clean_pdf",
+  "pipeline_version": "1.0",
+  "stage_1_extraction": {
+    "tier": "free",
+    "model": "pymupdf-local",
+    "duration_ms": 14,
+    "cached": false,
+    "extractable_text": true,
+    "fields": {
+      "invoice_number": {
+        "value": "SL-9034",
+        "confidence": 0.95,
+        "found_as": "Invoice No.",
+        "reason": null
+      },
+      "invoice_date": {
+        "value": "2026-03-31",
+        "confidence": 0.95,
+        "found_as": "Invoice Date",
+        "reason": null
+      },
+      "vendor_name": {
+        "value": "Sharma Logistics Pvt. Ltd.",
+        "confidence": 0.85,
+        "found_as": "letterhead (first line)",
+        "reason": null
+      },
+      "vendor_gstin": {
+        "value": "27AABCS1429B1ZX",
+        "confidence": 0.95,
+        "found_as": "GSTIN",
+        "reason": null
+      },
+      "po_reference": {
+        "value": "PO-1011",
+        "confidence": 0.95,
+        "found_as": "Purchase Order",
+        "reason": null
+      },
+      "service_period": {
+        "value": {
+          "from_date": "2026-03-16",
+          "to_date": "2026-03-31"
+        },
+        "confidence": 0.95,
+        "found_as": "Service Period",
+        "reason": null
+      },
+      "line_items": [
+        {
+          "description": "Monthly freight retainer - 16 Mar to 31 Mar 2026",
+          "qty": 1.0,
+          "unit_price_paise": 4500000,
+          "amount_paise": 4500000,
+          "confidence": 0.85
+        }
+      ],
+      "subtotal_paise": {
+        "value": 4500000,
+        "confidence": 0.95,
+        "found_as": "Taxable Value",
+        "reason": null
+      },
+      "gst_rate": {
+        "value": 18,
+        "confidence": 0.95,
+        "found_as": "IGST",
+        "reason": null
+      },
+      "tax_paise": {
+        "value": 810000,
+        "confidence": 0.95,
+        "found_as": "IGST @ 18% 8,100.00",
+        "reason": null
+      },
+      "total_paise": {
+        "value": 5310000,
+        "confidence": 0.95,
+        "found_as": "Total Payable",
+        "reason": null
+      },
+      "extraction_notes": []
+    },
+    "quality": {
+      "extractable_text": true,
+      "critical_present": 5,
+      "critical_total": 5,
+      "missing_critical": [],
+      "mean_critical_confidence": 0.93,
+      "passes_gate": true,
+      "gate_reason": null
+    },
+    "self_checks": {
+      "line_items_sum_to_subtotal": null,
+      "subtotal_plus_tax_equals_total": null,
+      "tax_matches_rate": null,
+      "date_parseable": null,
+      "gstin_well_formed": null,
+      "notes": []
+    },
+    "low_confidence_fields": []
+  },
+  "stage_2_matching": {
+    "match_status": "MATCHED",
+    "match_layer": 1,
+    "match_confidence": "HIGH",
+    "po_number": "PO-1011",
+    "vendor_id": "V-001",
+    "vendor_name_matched": "Sharma Logistics Private Limited",
+    "candidates_considered": [
+      {
+        "po_number": "PO-1011",
+        "score": 100,
+        "reason": "PO reference 'PO-1011' printed on the invoice"
+      }
+    ],
+    "vendor_match_score": 100,
+    "notes": [
+      "Vendor identified as V-001 - GSTIN exact match"
+    ]
+  },
+  "stage_3_financials": {
+    "po_total_paise": 54000000,
+    "already_invoiced_paise": 13500000,
+    "remaining_balance_paise": 40500000,
+    "invoice_subtotal_paise": 4500000,
+    "overage_paise": -36000000,
+    "allowed_overage_paise": 810000,
+    "binding_constraint": "percentage",
+    "percent_allowance_paise": 810000,
+    "cap_paise": 1000000,
+    "is_breach": false,
+    "is_under_billing": true,
+    "tolerance_consumption_pct": 0.0
+  },
+  "stage_4_rules": [
+    {
+      "rule_id": "R-001",
+      "name": "Invoice number present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": "SL-9034",
+      "message": "Invoice number SL-9034 found."
+    },
+    {
+      "rule_id": "R-002",
+      "name": "Invoice date present and parseable",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "a valid date",
+      "actual": "2026-03-31",
+      "message": "Invoice dated 2026-03-31."
+    },
+    {
+      "rule_id": "R-003",
+      "name": "Subtotal present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": 4500000,
+      "message": "Subtotal Rs 45,000.00."
+    },
+    {
+      "rule_id": "R-004",
+      "name": "Total present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": 5310000,
+      "message": "Total Rs 53,100.00."
+    },
+    {
+      "rule_id": "R-005",
+      "name": "Vendor identifiable",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "a name or GSTIN",
+      "actual": "Sharma Logistics Pvt. Ltd.",
+      "message": "Vendor identified from the document: Sharma Logistics Pvt. Ltd.."
+    },
+    {
+      "rule_id": "R-006",
+      "name": "Line items sum to subtotal",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "Rs 45,000.00",
+      "actual": "Rs 45,000.00",
+      "message": "1 line items sum to Rs 45,000.00, matching the subtotal."
+    },
+    {
+      "rule_id": "R-007",
+      "name": "Subtotal plus tax equals total",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "Rs 53,100.00",
+      "actual": "Rs 53,100.00",
+      "message": "Rs 45,000.00 + Rs 8,100.00 = Rs 53,100.00."
+    },
+    {
+      "rule_id": "R-008",
+      "name": "Critical fields meet confidence floor",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": ">= 0.8",
+      "actual": "all above floor",
+      "message": "All readable critical fields are at or above 0.80 confidence."
+    },
+    {
+      "rule_id": "R-009",
+      "name": "Supporting fields meet confidence floor",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": ">= 0.7",
+      "actual": "all above floor",
+      "message": "Supporting fields are adequately confident."
+    },
+    {
+      "rule_id": "R-010",
+      "name": "Extraction quality sufficient",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "gate passed",
+      "actual": "gate passed",
+      "message": "Extraction usable: 5/5 critical fields at 0.93 mean confidence (free tier)."
+    },
+    {
+      "rule_id": "R-101",
+      "name": "A purchase order was matched",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "a matched PO",
+      "actual": "PO-1011",
+      "message": "Matched to PO-1011 at layer 1 (high confidence)."
+    },
+    {
+      "rule_id": "R-102",
+      "name": "Match is unambiguous",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "exactly one candidate",
+      "actual": "PO-1011",
+      "message": "One clear match: PO-1011."
+    },
+    {
+      "rule_id": "R-103",
+      "name": "Invoice vendor matches PO vendor",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "V-001",
+      "actual": "V-001",
+      "message": "Sharma Logistics Private Limited is the vendor on PO-1011."
+    },
+    {
+      "rule_id": "R-104",
+      "name": "Purchase order is open",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "OPEN",
+      "actual": "OPEN",
+      "message": "PO-1011 is open."
+    },
+    {
+      "rule_id": "R-105",
+      "name": "Match came from a printed PO reference",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "explicit reference",
+      "actual": "explicit reference",
+      "message": "The invoice printed PO-1011 explicitly."
+    },
+    {
+      "rule_id": "R-201",
+      "name": "Vendor is on the approved list",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": true,
+      "actual": true,
+      "message": "Sharma Logistics Private Limited is an approved vendor."
+    },
+    {
+      "rule_id": "R-202",
+      "name": "Invoice GSTIN matches vendor master",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "27AABCS1429B1ZX",
+      "actual": "27AABCS1429B1ZX",
+      "message": "GSTIN 27AABCS1429B1ZX matches the vendor master."
+    },
+    {
+      "rule_id": "R-203",
+      "name": "Vendor has prior invoice history",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": ">= 1",
+      "actual": 4,
+      "message": "4 prior invoice(s) on record for Sharma Logistics Private Limited."
+    },
+    {
+      "rule_id": "R-301",
+      "name": "Currency is supported",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "INR",
+      "actual": "INR",
+      "message": "PO-1011 is denominated in INR."
+    },
+    {
+      "rule_id": "R-302",
+      "name": "Over-billing within tolerance",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= Rs 8,100.00 overage",
+      "actual": "-Rs 3,60,000.00",
+      "message": "Rs 45,000.00 against a remaining balance of Rs 4,05,000.00. No over-billing."
+    },
+    {
+      "rule_id": "R-303",
+      "name": "Contract ceiling not breached",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= Rs 5,48,100.00",
+      "actual": "Rs 1,80,000.00",
+      "message": "Total billing on PO-1011 would reach Rs 1,80,000.00 against a ceiling of Rs 5,48,100.00."
+    },
+    {
+      "rule_id": "R-304",
+      "name": "Tolerance not substantially consumed",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "<= 50%",
+      "actual": "0%",
+      "message": "No tolerance consumed -- the invoice is within the remaining balance."
+    },
+    {
+      "rule_id": "R-305",
+      "name": "Billing position against the PO",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": "informational",
+      "actual": "-Rs 3,60,000.00",
+      "message": "Under-billed by Rs 3,60,000.00 (66.7% of the PO). Normal for a partial delivery or a job that came in under budget. No limit applies to under-billing."
+    },
+    {
+      "rule_id": "R-401",
+      "name": "GST rate is a valid slab",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": [
+        0,
+        5,
+        12,
+        18,
+        28
+      ],
+      "actual": 18,
+      "message": "GST at 18% is a valid slab."
+    },
+    {
+      "rule_id": "R-402",
+      "name": "Tax arithmetic is correct",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "Rs 8,100.00",
+      "actual": "Rs 8,100.00",
+      "message": "Rs 45,000.00 at 18% gives Rs 8,100.00."
+    },
+    {
+      "rule_id": "R-403",
+      "name": "Vendor GSTIN is well formed",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "15 characters",
+      "actual": 15,
+      "message": "GSTIN 27AABCS1429B1ZX is the correct length."
+    },
+    {
+      "rule_id": "R-404",
+      "name": "GST rate matches the PO expectation",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": 18,
+      "actual": 18,
+      "message": "GST at 18% matches what PO-1011 expects."
+    },
+    {
+      "rule_id": "R-501",
+      "name": "Not an exact duplicate",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "not previously seen",
+      "actual": "SL-9034",
+      "message": "Invoice SL-9034 has not been seen before from Sharma Logistics Private Limited (4 prior on record)."
+    },
+    {
+      "rule_id": "R-502",
+      "name": "Not a suspected near-duplicate",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "distinct service periods",
+      "actual": "periods differ",
+      "message": "Matches SL-9012 on amount and timing, but the service periods do not overlap -- this is recurring billing, not a duplicate. This invoice covers 2026-03-16 to 2026-03-31."
+    },
+    {
+      "rule_id": "R-601",
+      "name": "Invoice is not dated before its PO",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": ">= 2026-01-05",
+      "actual": "2026-03-31",
+      "message": "Invoiced 2026-03-31, 85 days after PO-1011 was raised."
+    },
+    {
+      "rule_id": "R-602",
+      "name": "Invoice is not dated in the future",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= 2026-08-10",
+      "actual": "2026-03-31",
+      "message": "Invoiced 2026-03-31."
+    },
+    {
+      "rule_id": "R-603",
+      "name": "Invoice falls within the PO validity window",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "<= 2026-12-31",
+      "actual": "2026-03-31",
+      "message": "Invoiced 2026-03-31, within PO-1011's validity to 2026-12-31."
+    },
+    {
+      "rule_id": "R-604",
+      "name": "Invoice date reading is unambiguous",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": "unambiguous",
+      "actual": "2026-03-31",
+      "message": "2026-03-31 can only be read one way -- day 31 cannot be a month."
+    }
+  ],
+  "stage_5_decision": {
+    "decision": "AUTO_APPROVE",
+    "determined_by": [],
+    "rules_run": 33,
+    "rules_passed": 33,
+    "rules_failed": 0,
+    "rules_skipped": 0,
+    "summary": "Auto Approve -- queued for payment with no human involvement.\nMatched to PO-1011 from the PO reference printed on the invoice.\nBilled Rs 45,000.00 against a remaining balance of Rs 4,05,000.00.\nEvery rule passed."
+  }
+}

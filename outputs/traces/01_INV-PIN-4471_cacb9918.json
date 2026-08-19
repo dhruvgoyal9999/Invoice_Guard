@@ -1,0 +1,467 @@
+{
+  "trace_id": "01_INV-PIN-4471_cacb9918",
+  "processed_at": "2026-08-17T20:26:11.862327Z",
+  "source_file": "C:\\Users\\73427\\Downloads\\invoice-decisioning (1)\\invoice-decisioning\\data\\invoices\\clean\\01_INV-PIN-4471.pdf",
+  "source_type": "clean_pdf",
+  "pipeline_version": "1.0",
+  "stage_1_extraction": {
+    "tier": "free",
+    "model": "pymupdf-local",
+    "duration_ms": 31,
+    "cached": true,
+    "extractable_text": true,
+    "fields": {
+      "invoice_number": {
+        "value": "INV-PIN-4471",
+        "confidence": 0.95,
+        "found_as": "Inv #",
+        "reason": null
+      },
+      "invoice_date": {
+        "value": "2026-07-14",
+        "confidence": 0.95,
+        "found_as": "Date",
+        "reason": null
+      },
+      "vendor_name": {
+        "value": "Pinnacle Office Supplies Pvt Ltd",
+        "confidence": 0.85,
+        "found_as": "letterhead (first line)",
+        "reason": null
+      },
+      "vendor_gstin": {
+        "value": "07AABCP3312M1ZF",
+        "confidence": 0.95,
+        "found_as": "GSTIN",
+        "reason": null
+      },
+      "po_reference": {
+        "value": "PO-1001",
+        "confidence": 0.95,
+        "found_as": "Order Ref",
+        "reason": null
+      },
+      "service_period": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": "No service period on this invoice"
+      },
+      "line_items": [
+        {
+          "description": "A4 Copier Paper 80gsm (ream)",
+          "qty": 250.0,
+          "unit_price_paise": 40000,
+          "amount_paise": 10000000,
+          "confidence": 0.85
+        },
+        {
+          "description": "Whiteboard Markers - box of 12",
+          "qty": 150.0,
+          "unit_price_paise": 35000,
+          "amount_paise": 5250000,
+          "confidence": 0.85
+        },
+        {
+          "description": "Desk Organiser - 3 tier",
+          "qty": 100.0,
+          "unit_price_paise": 46000,
+          "amount_paise": 4600000,
+          "confidence": 0.85
+        }
+      ],
+      "subtotal_paise": {
+        "value": 19850000,
+        "confidence": 0.95,
+        "found_as": "Amount (excl. tax)",
+        "reason": null
+      },
+      "gst_rate": {
+        "value": 18,
+        "confidence": 0.95,
+        "found_as": "CGST + SGST",
+        "reason": null
+      },
+      "tax_paise": {
+        "value": 3573000,
+        "confidence": 0.95,
+        "found_as": "CGST @ 9% 17,865.00 + SGST @ 9% 17,865.00",
+        "reason": null
+      },
+      "total_paise": {
+        "value": 23423000,
+        "confidence": 0.95,
+        "found_as": "TOTAL",
+        "reason": null
+      },
+      "extraction_notes": [
+        "Tax split across 2 components, summed to 18%"
+      ]
+    },
+    "quality": {
+      "extractable_text": true,
+      "critical_present": 5,
+      "critical_total": 5,
+      "missing_critical": [],
+      "mean_critical_confidence": 0.93,
+      "passes_gate": true,
+      "gate_reason": null
+    },
+    "self_checks": {
+      "line_items_sum_to_subtotal": null,
+      "subtotal_plus_tax_equals_total": null,
+      "tax_matches_rate": null,
+      "date_parseable": null,
+      "gstin_well_formed": null,
+      "notes": []
+    },
+    "low_confidence_fields": []
+  },
+  "stage_2_matching": {
+    "match_status": "MATCHED",
+    "match_layer": 1,
+    "match_confidence": "HIGH",
+    "po_number": "PO-1001",
+    "vendor_id": "V-004",
+    "vendor_name_matched": "Pinnacle Office Supplies Private Limited",
+    "candidates_considered": [
+      {
+        "po_number": "PO-1001",
+        "score": 100,
+        "reason": "PO reference 'PO-1001' printed on the invoice"
+      }
+    ],
+    "vendor_match_score": 100,
+    "notes": [
+      "Vendor identified as V-004 - GSTIN exact match"
+    ]
+  },
+  "stage_3_financials": {
+    "po_total_paise": 20000000,
+    "already_invoiced_paise": 0,
+    "remaining_balance_paise": 20000000,
+    "invoice_subtotal_paise": 19850000,
+    "overage_paise": -150000,
+    "allowed_overage_paise": 300000,
+    "binding_constraint": "percentage",
+    "percent_allowance_paise": 300000,
+    "cap_paise": 1000000,
+    "is_breach": false,
+    "is_under_billing": true,
+    "tolerance_consumption_pct": 0.0
+  },
+  "stage_4_rules": [
+    {
+      "rule_id": "R-001",
+      "name": "Invoice number present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": "INV-PIN-4471",
+      "message": "Invoice number INV-PIN-4471 found."
+    },
+    {
+      "rule_id": "R-002",
+      "name": "Invoice date present and parseable",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "a valid date",
+      "actual": "2026-07-14",
+      "message": "Invoice dated 2026-07-14."
+    },
+    {
+      "rule_id": "R-003",
+      "name": "Subtotal present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": 19850000,
+      "message": "Subtotal Rs 1,98,500.00."
+    },
+    {
+      "rule_id": "R-004",
+      "name": "Total present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": 23423000,
+      "message": "Total Rs 2,34,230.00."
+    },
+    {
+      "rule_id": "R-005",
+      "name": "Vendor identifiable",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "a name or GSTIN",
+      "actual": "Pinnacle Office Supplies Pvt Ltd",
+      "message": "Vendor identified from the document: Pinnacle Office Supplies Pvt Ltd."
+    },
+    {
+      "rule_id": "R-006",
+      "name": "Line items sum to subtotal",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "Rs 1,98,500.00",
+      "actual": "Rs 1,98,500.00",
+      "message": "3 line items sum to Rs 1,98,500.00, matching the subtotal."
+    },
+    {
+      "rule_id": "R-007",
+      "name": "Subtotal plus tax equals total",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "Rs 2,34,230.00",
+      "actual": "Rs 2,34,230.00",
+      "message": "Rs 1,98,500.00 + Rs 35,730.00 = Rs 2,34,230.00."
+    },
+    {
+      "rule_id": "R-008",
+      "name": "Critical fields meet confidence floor",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": ">= 0.8",
+      "actual": "all above floor",
+      "message": "All readable critical fields are at or above 0.80 confidence."
+    },
+    {
+      "rule_id": "R-009",
+      "name": "Supporting fields meet confidence floor",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": ">= 0.7",
+      "actual": "all above floor",
+      "message": "Supporting fields are adequately confident."
+    },
+    {
+      "rule_id": "R-010",
+      "name": "Extraction quality sufficient",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "gate passed",
+      "actual": "gate passed",
+      "message": "Extraction usable: 5/5 critical fields at 0.93 mean confidence (free tier)."
+    },
+    {
+      "rule_id": "R-101",
+      "name": "A purchase order was matched",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "a matched PO",
+      "actual": "PO-1001",
+      "message": "Matched to PO-1001 at layer 1 (high confidence)."
+    },
+    {
+      "rule_id": "R-102",
+      "name": "Match is unambiguous",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "exactly one candidate",
+      "actual": "PO-1001",
+      "message": "One clear match: PO-1001."
+    },
+    {
+      "rule_id": "R-103",
+      "name": "Invoice vendor matches PO vendor",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "V-004",
+      "actual": "V-004",
+      "message": "Pinnacle Office Supplies Private Limited is the vendor on PO-1001."
+    },
+    {
+      "rule_id": "R-104",
+      "name": "Purchase order is open",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "OPEN",
+      "actual": "OPEN",
+      "message": "PO-1001 is open."
+    },
+    {
+      "rule_id": "R-105",
+      "name": "Match came from a printed PO reference",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "explicit reference",
+      "actual": "explicit reference",
+      "message": "The invoice printed PO-1001 explicitly."
+    },
+    {
+      "rule_id": "R-201",
+      "name": "Vendor is on the approved list",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": true,
+      "actual": true,
+      "message": "Pinnacle Office Supplies Private Limited is an approved vendor."
+    },
+    {
+      "rule_id": "R-202",
+      "name": "Invoice GSTIN matches vendor master",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "07AABCP3312M1ZF",
+      "actual": "07AABCP3312M1ZF",
+      "message": "GSTIN 07AABCP3312M1ZF matches the vendor master."
+    },
+    {
+      "rule_id": "R-203",
+      "name": "Vendor has prior invoice history",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": ">= 1",
+      "actual": 1,
+      "message": "1 prior invoice(s) on record for Pinnacle Office Supplies Private Limited."
+    },
+    {
+      "rule_id": "R-301",
+      "name": "Currency is supported",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "INR",
+      "actual": "INR",
+      "message": "PO-1001 is denominated in INR."
+    },
+    {
+      "rule_id": "R-302",
+      "name": "Over-billing within tolerance",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= Rs 3,000.00 overage",
+      "actual": "-Rs 1,500.00",
+      "message": "Rs 1,98,500.00 against a remaining balance of Rs 2,00,000.00. No over-billing."
+    },
+    {
+      "rule_id": "R-303",
+      "name": "Contract ceiling not breached",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= Rs 2,03,000.00",
+      "actual": "Rs 1,98,500.00",
+      "message": "Total billing on PO-1001 would reach Rs 1,98,500.00 against a ceiling of Rs 2,03,000.00."
+    },
+    {
+      "rule_id": "R-304",
+      "name": "Tolerance not substantially consumed",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "<= 50%",
+      "actual": "0%",
+      "message": "No tolerance consumed -- the invoice is within the remaining balance."
+    },
+    {
+      "rule_id": "R-305",
+      "name": "Billing position against the PO",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": "informational",
+      "actual": "-Rs 1,500.00",
+      "message": "Under-billed by Rs 1,500.00 (0.8% of the PO). Normal for a partial delivery or a job that came in under budget. No limit applies to under-billing."
+    },
+    {
+      "rule_id": "R-401",
+      "name": "GST rate is a valid slab",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": [
+        0,
+        5,
+        12,
+        18,
+        28
+      ],
+      "actual": 18,
+      "message": "GST at 18% is a valid slab."
+    },
+    {
+      "rule_id": "R-402",
+      "name": "Tax arithmetic is correct",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "Rs 35,730.00",
+      "actual": "Rs 35,730.00",
+      "message": "Rs 1,98,500.00 at 18% gives Rs 35,730.00."
+    },
+    {
+      "rule_id": "R-403",
+      "name": "Vendor GSTIN is well formed",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "15 characters",
+      "actual": 15,
+      "message": "GSTIN 07AABCP3312M1ZF is the correct length."
+    },
+    {
+      "rule_id": "R-404",
+      "name": "GST rate matches the PO expectation",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": 18,
+      "actual": 18,
+      "message": "GST at 18% matches what PO-1001 expects."
+    },
+    {
+      "rule_id": "R-501",
+      "name": "Not an exact duplicate",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "not previously seen",
+      "actual": "INV-PIN-4471",
+      "message": "Invoice INV-PIN-4471 has not been seen before from Pinnacle Office Supplies Private Limited (1 prior on record)."
+    },
+    {
+      "rule_id": "R-502",
+      "name": "Not a suspected near-duplicate",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "no near-duplicate",
+      "actual": "none found",
+      "message": "No other invoice from Pinnacle Office Supplies Private Limited for Rs 1,98,500.00 within 30 days."
+    },
+    {
+      "rule_id": "R-601",
+      "name": "Invoice is not dated before its PO",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": ">= 2026-06-10",
+      "actual": "2026-07-14",
+      "message": "Invoiced 2026-07-14, 34 days after PO-1001 was raised."
+    },
+    {
+      "rule_id": "R-602",
+      "name": "Invoice is not dated in the future",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= 2026-08-10",
+      "actual": "2026-07-14",
+      "message": "Invoiced 2026-07-14."
+    },
+    {
+      "rule_id": "R-603",
+      "name": "Invoice falls within the PO validity window",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "<= 2026-12-31",
+      "actual": "2026-07-14",
+      "message": "Invoiced 2026-07-14, within PO-1001's validity to 2026-12-31."
+    },
+    {
+      "rule_id": "R-604",
+      "name": "Invoice date reading is unambiguous",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": "unambiguous",
+      "actual": "2026-07-14",
+      "message": "2026-07-14 can only be read one way -- day 14 cannot be a month."
+    }
+  ],
+  "stage_5_decision": {
+    "decision": "AUTO_APPROVE",
+    "determined_by": [],
+    "rules_run": 33,
+    "rules_passed": 33,
+    "rules_failed": 0,
+    "rules_skipped": 0,
+    "summary": "Auto Approve -- queued for payment with no human involvement.\nMatched to PO-1001 from the PO reference printed on the invoice.\nBilled Rs 1,98,500.00 against a remaining balance of Rs 2,00,000.00.\nEvery rule passed."
+  }
+}

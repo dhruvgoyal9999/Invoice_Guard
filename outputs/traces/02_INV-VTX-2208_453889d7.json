@@ -1,0 +1,458 @@
+{
+  "trace_id": "02_INV-VTX-2208_453889d7",
+  "processed_at": "2026-08-17T19:37:20.720617Z",
+  "source_file": "C:\\Users\\73427\\Downloads\\invoice-decisioning (1)\\invoice-decisioning\\data\\invoices\\clean\\02_INV-VTX-2208.pdf",
+  "source_type": "clean_pdf",
+  "pipeline_version": "1.0",
+  "stage_1_extraction": {
+    "tier": "free",
+    "model": "pymupdf-local",
+    "duration_ms": 15,
+    "cached": false,
+    "extractable_text": true,
+    "fields": {
+      "invoice_number": {
+        "value": "INV-VTX-2208",
+        "confidence": 0.95,
+        "found_as": "BILL NUMBER",
+        "reason": null
+      },
+      "invoice_date": {
+        "value": "2026-07-02",
+        "confidence": 0.95,
+        "found_as": "DATED",
+        "reason": null
+      },
+      "vendor_name": {
+        "value": "Vertex Software Solutions Private Limited",
+        "confidence": 0.85,
+        "found_as": "letterhead (first line)",
+        "reason": null
+      },
+      "vendor_gstin": {
+        "value": "29AABCV7745N1ZR",
+        "confidence": 0.95,
+        "found_as": "GSTIN",
+        "reason": null
+      },
+      "po_reference": {
+        "value": "PO-1002",
+        "confidence": 0.95,
+        "found_as": "REF: PO",
+        "reason": null
+      },
+      "service_period": {
+        "value": null,
+        "confidence": 0.0,
+        "found_as": null,
+        "reason": "No service period on this invoice"
+      },
+      "line_items": [
+        {
+          "description": "CRM Platform Annual Licence - 50 seats",
+          "qty": 50.0,
+          "unit_price_paise": 720000,
+          "amount_paise": 36000000,
+          "confidence": 0.85
+        },
+        {
+          "description": "Priority Support Add-on - 12 months",
+          "qty": 1.0,
+          "unit_price_paise": 9000000,
+          "amount_paise": 9000000,
+          "confidence": 0.85
+        }
+      ],
+      "subtotal_paise": {
+        "value": 45000000,
+        "confidence": 0.95,
+        "found_as": "Sub Total",
+        "reason": null
+      },
+      "gst_rate": {
+        "value": 18,
+        "confidence": 0.95,
+        "found_as": "GST",
+        "reason": null
+      },
+      "tax_paise": {
+        "value": 8100000,
+        "confidence": 0.95,
+        "found_as": "GST 18% 81,000.00",
+        "reason": null
+      },
+      "total_paise": {
+        "value": 53100000,
+        "confidence": 0.95,
+        "found_as": "Amount Due",
+        "reason": null
+      },
+      "extraction_notes": []
+    },
+    "quality": {
+      "extractable_text": true,
+      "critical_present": 5,
+      "critical_total": 5,
+      "missing_critical": [],
+      "mean_critical_confidence": 0.93,
+      "passes_gate": true,
+      "gate_reason": null
+    },
+    "self_checks": {
+      "line_items_sum_to_subtotal": null,
+      "subtotal_plus_tax_equals_total": null,
+      "tax_matches_rate": null,
+      "date_parseable": null,
+      "gstin_well_formed": null,
+      "notes": []
+    },
+    "low_confidence_fields": []
+  },
+  "stage_2_matching": {
+    "match_status": "MATCHED",
+    "match_layer": 1,
+    "match_confidence": "HIGH",
+    "po_number": "PO-1002",
+    "vendor_id": "V-005",
+    "vendor_name_matched": "Vertex Software Solutions Private Limited",
+    "candidates_considered": [
+      {
+        "po_number": "PO-1002",
+        "score": 100,
+        "reason": "PO reference 'PO-1002' printed on the invoice"
+      }
+    ],
+    "vendor_match_score": 100,
+    "notes": [
+      "Vendor identified as V-005 - GSTIN exact match"
+    ]
+  },
+  "stage_3_financials": {
+    "po_total_paise": 45000000,
+    "already_invoiced_paise": 0,
+    "remaining_balance_paise": 45000000,
+    "invoice_subtotal_paise": 45000000,
+    "overage_paise": 0,
+    "allowed_overage_paise": 675000,
+    "binding_constraint": "percentage",
+    "percent_allowance_paise": 675000,
+    "cap_paise": 1000000,
+    "is_breach": false,
+    "is_under_billing": true,
+    "tolerance_consumption_pct": 0.0
+  },
+  "stage_4_rules": [
+    {
+      "rule_id": "R-001",
+      "name": "Invoice number present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": "INV-VTX-2208",
+      "message": "Invoice number INV-VTX-2208 found."
+    },
+    {
+      "rule_id": "R-002",
+      "name": "Invoice date present and parseable",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "a valid date",
+      "actual": "2026-07-02",
+      "message": "Invoice dated 2026-07-02."
+    },
+    {
+      "rule_id": "R-003",
+      "name": "Subtotal present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": 45000000,
+      "message": "Subtotal Rs 4,50,000.00."
+    },
+    {
+      "rule_id": "R-004",
+      "name": "Total present",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "not null",
+      "actual": 53100000,
+      "message": "Total Rs 5,31,000.00."
+    },
+    {
+      "rule_id": "R-005",
+      "name": "Vendor identifiable",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "a name or GSTIN",
+      "actual": "Vertex Software Solutions Private Limited",
+      "message": "Vendor identified from the document: Vertex Software Solutions Private Limited."
+    },
+    {
+      "rule_id": "R-006",
+      "name": "Line items sum to subtotal",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "Rs 4,50,000.00",
+      "actual": "Rs 4,50,000.00",
+      "message": "2 line items sum to Rs 4,50,000.00, matching the subtotal."
+    },
+    {
+      "rule_id": "R-007",
+      "name": "Subtotal plus tax equals total",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "Rs 5,31,000.00",
+      "actual": "Rs 5,31,000.00",
+      "message": "Rs 4,50,000.00 + Rs 81,000.00 = Rs 5,31,000.00."
+    },
+    {
+      "rule_id": "R-008",
+      "name": "Critical fields meet confidence floor",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": ">= 0.8",
+      "actual": "all above floor",
+      "message": "All readable critical fields are at or above 0.80 confidence."
+    },
+    {
+      "rule_id": "R-009",
+      "name": "Supporting fields meet confidence floor",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": ">= 0.7",
+      "actual": "all above floor",
+      "message": "Supporting fields are adequately confident."
+    },
+    {
+      "rule_id": "R-010",
+      "name": "Extraction quality sufficient",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "gate passed",
+      "actual": "gate passed",
+      "message": "Extraction usable: 5/5 critical fields at 0.93 mean confidence (free tier)."
+    },
+    {
+      "rule_id": "R-101",
+      "name": "A purchase order was matched",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "a matched PO",
+      "actual": "PO-1002",
+      "message": "Matched to PO-1002 at layer 1 (high confidence)."
+    },
+    {
+      "rule_id": "R-102",
+      "name": "Match is unambiguous",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "exactly one candidate",
+      "actual": "PO-1002",
+      "message": "One clear match: PO-1002."
+    },
+    {
+      "rule_id": "R-103",
+      "name": "Invoice vendor matches PO vendor",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "V-005",
+      "actual": "V-005",
+      "message": "Vertex Software Solutions Private Limited is the vendor on PO-1002."
+    },
+    {
+      "rule_id": "R-104",
+      "name": "Purchase order is open",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "OPEN",
+      "actual": "OPEN",
+      "message": "PO-1002 is open."
+    },
+    {
+      "rule_id": "R-105",
+      "name": "Match came from a printed PO reference",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "explicit reference",
+      "actual": "explicit reference",
+      "message": "The invoice printed PO-1002 explicitly."
+    },
+    {
+      "rule_id": "R-201",
+      "name": "Vendor is on the approved list",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": true,
+      "actual": true,
+      "message": "Vertex Software Solutions Private Limited is an approved vendor."
+    },
+    {
+      "rule_id": "R-202",
+      "name": "Invoice GSTIN matches vendor master",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "29AABCV7745N1ZR",
+      "actual": "29AABCV7745N1ZR",
+      "message": "GSTIN 29AABCV7745N1ZR matches the vendor master."
+    },
+    {
+      "rule_id": "R-203",
+      "name": "Vendor has prior invoice history",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": ">= 1",
+      "actual": 1,
+      "message": "1 prior invoice(s) on record for Vertex Software Solutions Private Limited."
+    },
+    {
+      "rule_id": "R-301",
+      "name": "Currency is supported",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "INR",
+      "actual": "INR",
+      "message": "PO-1002 is denominated in INR."
+    },
+    {
+      "rule_id": "R-302",
+      "name": "Over-billing within tolerance",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= Rs 6,750.00 overage",
+      "actual": "Rs 0.00",
+      "message": "Rs 4,50,000.00 against a remaining balance of Rs 4,50,000.00. No over-billing."
+    },
+    {
+      "rule_id": "R-303",
+      "name": "Contract ceiling not breached",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= Rs 4,56,750.00",
+      "actual": "Rs 4,50,000.00",
+      "message": "Total billing on PO-1002 would reach Rs 4,50,000.00 against a ceiling of Rs 4,56,750.00."
+    },
+    {
+      "rule_id": "R-304",
+      "name": "Tolerance not substantially consumed",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "<= 50%",
+      "actual": "0%",
+      "message": "No tolerance consumed -- the invoice is within the remaining balance."
+    },
+    {
+      "rule_id": "R-305",
+      "name": "Billing position against the PO",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": "informational",
+      "actual": "Rs 0.00",
+      "message": "Under-billed by Rs 0.00 (0.0% of the PO). Normal for a partial delivery or a job that came in under budget. No limit applies to under-billing."
+    },
+    {
+      "rule_id": "R-401",
+      "name": "GST rate is a valid slab",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": [
+        0,
+        5,
+        12,
+        18,
+        28
+      ],
+      "actual": 18,
+      "message": "GST at 18% is a valid slab."
+    },
+    {
+      "rule_id": "R-402",
+      "name": "Tax arithmetic is correct",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "Rs 81,000.00",
+      "actual": "Rs 81,000.00",
+      "message": "Rs 4,50,000.00 at 18% gives Rs 81,000.00."
+    },
+    {
+      "rule_id": "R-403",
+      "name": "Vendor GSTIN is well formed",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "15 characters",
+      "actual": 15,
+      "message": "GSTIN 29AABCV7745N1ZR is the correct length."
+    },
+    {
+      "rule_id": "R-404",
+      "name": "GST rate matches the PO expectation",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": 18,
+      "actual": 18,
+      "message": "GST at 18% matches what PO-1002 expects."
+    },
+    {
+      "rule_id": "R-501",
+      "name": "Not an exact duplicate",
+      "status": "PASS",
+      "severity": "BLOCKER",
+      "expected": "not previously seen",
+      "actual": "INV-VTX-2208",
+      "message": "Invoice INV-VTX-2208 has not been seen before from Vertex Software Solutions Private Limited (1 prior on record)."
+    },
+    {
+      "rule_id": "R-502",
+      "name": "Not a suspected near-duplicate",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "no near-duplicate",
+      "actual": "none found",
+      "message": "No other invoice from Vertex Software Solutions Private Limited for Rs 4,50,000.00 within 30 days."
+    },
+    {
+      "rule_id": "R-601",
+      "name": "Invoice is not dated before its PO",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": ">= 2026-05-22",
+      "actual": "2026-07-02",
+      "message": "Invoiced 2026-07-02, 41 days after PO-1002 was raised."
+    },
+    {
+      "rule_id": "R-602",
+      "name": "Invoice is not dated in the future",
+      "status": "PASS",
+      "severity": "CRITICAL",
+      "expected": "<= 2026-08-10",
+      "actual": "2026-07-02",
+      "message": "Invoiced 2026-07-02."
+    },
+    {
+      "rule_id": "R-603",
+      "name": "Invoice falls within the PO validity window",
+      "status": "PASS",
+      "severity": "WARNING",
+      "expected": "<= 2026-11-30",
+      "actual": "2026-07-02",
+      "message": "Invoiced 2026-07-02, within PO-1002's validity to 2026-11-30."
+    },
+    {
+      "rule_id": "R-604",
+      "name": "Invoice date reading is unambiguous",
+      "status": "PASS",
+      "severity": "INFO",
+      "expected": "unambiguous",
+      "actual": "DD/MM assumed; MM/DD would give 2026-02-07",
+      "message": "2026-07-02 was read as DD/MM per the Indian convention (Spec A-08). Read as MM/DD it would be 2026-02-07. No other evidence on the document contradicts the DD/MM reading."
+    }
+  ],
+  "stage_5_decision": {
+    "decision": "AUTO_APPROVE",
+    "determined_by": [],
+    "rules_run": 33,
+    "rules_passed": 33,
+    "rules_failed": 0,
+    "rules_skipped": 0,
+    "summary": "Auto Approve -- queued for payment with no human involvement.\nMatched to PO-1002 from the PO reference printed on the invoice.\nBilled Rs 4,50,000.00 against a remaining balance of Rs 4,50,000.00.\nEvery rule passed."
+  }
+}
